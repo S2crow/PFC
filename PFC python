@@ -1,0 +1,44 @@
+import random
+
+def choisir_option():
+    """Demande à l'utilisateur de choisir Pierre, Feuille ou Ciseaux"""
+    choix = input("Choisissez Pierre, Feuille ou Ciseaux : ").lower()
+    while choix not in ["pierre", "feuille", "ciseaux"]:
+        print("Choix invalide. Essayez encore.")
+        choix = input("Choisissez Pierre, Feuille ou Ciseaux : ").lower()
+    return choix
+
+def choix_ordinateur():
+    """Retourne un choix aléatoire pour l'ordinateur"""
+    return random.choice(["pierre", "feuille", "ciseaux"])
+
+def determine_gagnant(choix_utilisateur, choix_ordi):
+    """Détermine qui a gagné la partie"""
+    if choix_utilisateur == choix_ordi:
+        return "Égalité"
+    elif (choix_utilisateur == "pierre" and choix_ordi == "ciseaux") or \
+         (choix_utilisateur == "feuille" and choix_ordi == "pierre") or \
+         (choix_utilisateur == "ciseaux" and choix_ordi == "feuille"):
+        return "Vous avez gagné !"
+    else:
+        return "L'ordinateur a gagné."
+
+def main():
+    """Fonction principale pour jouer à Pierre-Feuille-Ciseaux"""
+    print("Bienvenue à Pierre, Feuille, Ciseaux !")
+    
+    while True:
+        choix_utilisateur = choisir_option()
+        choix_ordi = choix_ordinateur()
+        print(f"L'ordinateur a choisi : {choix_ordi}")
+        
+        resultat = determine_gagnant(choix_utilisateur, choix_ordi)
+        print(resultat)
+        
+        rejouer = input("Voulez-vous rejouer ? (oui/non) : ").lower()
+        if rejouer != "oui":
+            print("Merci d'avoir joué ! À bientôt.")
+            break
+
+if __name__ == "__main__":
+    main()
